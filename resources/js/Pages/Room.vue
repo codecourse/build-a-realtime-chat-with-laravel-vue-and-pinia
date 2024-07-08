@@ -4,6 +4,7 @@ import { Head } from '@inertiajs/vue3';
 import ChatTextarea from "@/Components/Chat/ChatTextarea.vue";
 import {useMessagesStore} from "@/Store/useMessagesStore.js";
 import ChatMessages from "@/Components/Chat/ChatMessages.vue";
+import axios from "axios";
 
 const props = defineProps({
     room: Object
@@ -16,6 +17,13 @@ messagesStore.fetchState(props.room.slug)
 const storeMessage = (payload) => {
     messagesStore.storeMessage(props.room.slug, payload)
 }
+
+const channel = Echo.join(`room.${props.room.id}`)
+
+channel
+    .listen('MessageCreated', (e) => {
+        console.log(e)
+    })
 </script>
 
 <template>

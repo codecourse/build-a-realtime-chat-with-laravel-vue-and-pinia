@@ -21,7 +21,11 @@ export const useMessagesStore = defineStore('messages', {
         },
 
         storeMessage (roomSlug, payload) {
-            axios.post(`/rooms/${roomSlug}/messages`, payload)
+            axios.post(`/rooms/${roomSlug}/messages`, payload, {
+                headers: {
+                    'X-Socket-Id': Echo.socketId()
+                }
+            })
                 .then(response => {
                     this.messages = [response.data, ...this.messages]
                 })

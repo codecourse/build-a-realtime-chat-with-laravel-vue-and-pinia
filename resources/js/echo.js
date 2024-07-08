@@ -1,6 +1,7 @@
 import Echo from 'laravel-echo';
 
 import Pusher from 'pusher-js';
+import axios from "axios";
 window.Pusher = Pusher;
 
 window.Echo = new Echo({
@@ -12,3 +13,4 @@ window.Echo = new Echo({
     forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
+
