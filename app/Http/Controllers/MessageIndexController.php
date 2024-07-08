@@ -11,7 +11,7 @@ class MessageIndexController extends Controller
     public function __invoke(Room $room)
     {
         return MessageResource::collection(
-            $room->messages()->with('user')->latest()->paginate(30)
+            $room->messages()->with('user')->latest()->paginate(100)
         );
     }
 }

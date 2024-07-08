@@ -34,7 +34,7 @@ messagesStore.fetchState(props.room.slug)
 
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-9">
                     <div class="p-6 text-gray-900 space-y-3">
-                        <ChatMessages />
+                        <ChatMessages :room="room" />
 
                         <ChatTextarea
                             class="w-full"
