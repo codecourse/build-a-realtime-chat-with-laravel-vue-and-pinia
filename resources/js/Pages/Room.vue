@@ -12,6 +12,10 @@ const props = defineProps({
 const messagesStore = useMessagesStore()
 
 messagesStore.fetchState(props.room.slug)
+
+const storeMessage = (payload) => {
+    messagesStore.storeMessage(props.room.slug, payload)
+}
 </script>
 
 <template>
@@ -39,7 +43,7 @@ messagesStore.fetchState(props.room.slug)
                         <ChatTextarea
                             class="w-full"
                             placeholder="Say something..."
-                            v-on:valid="console.log($event)"
+                            v-on:valid="storeMessage({ body: $event })"
                         />
                     </div>
                 </div>

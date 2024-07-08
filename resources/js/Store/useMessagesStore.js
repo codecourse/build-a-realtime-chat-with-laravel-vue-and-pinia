@@ -18,6 +18,13 @@ export const useMessagesStore = defineStore('messages', {
 
         fetchPreviousState (roomSlug) {
             this.fetchState(roomSlug, this.page + 1)
+        },
+
+        storeMessage (roomSlug, payload) {
+            axios.post(`/rooms/${roomSlug}/messages`, payload)
+                .then(response => {
+                    this.messages = [response.data, ...this.messages]
+                })
         }
     },
 
