@@ -35,6 +35,7 @@ channel
     .here(users => usersStore.setUsers(users))
     .joining(user => usersStore.addUser(user))
     .leaving(user => usersStore.removeUser(user))
+    .listenForWhisper('typing', e => usersStore.setTyping(e))
 </script>
 
 <template>
@@ -63,7 +64,7 @@ channel
                             class="w-full"
                             placeholder="Say something..."
                             v-on:valid="storeMessage({ body: $event })"
-                            v-on:typing="console.log($event)"
+                            v-on:typing="channel.whisper('typing', { id: $page.props.auth.user.id, typing: $event })"
                         />
                     </div>
                 </div>
