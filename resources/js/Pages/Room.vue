@@ -63,6 +63,7 @@ channel
                             class="w-full"
                             placeholder="Say something..."
                             v-on:valid="storeMessage({ body: $event })"
+                            v-on:typing="console.log($event)"
                         />
                     </div>
                 </div>

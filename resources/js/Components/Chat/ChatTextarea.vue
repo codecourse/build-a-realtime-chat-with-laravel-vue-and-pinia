@@ -17,6 +17,22 @@ const handleEnter = () => {
         model.value = ''
     }
 }
+
+let typingTimeout = null
+
+const handleTyping = () => {
+    clearTimeout(typingTimeout)
+
+    emit('typing', true)
+
+    typingTimeout = setTimeout(handleFinishedTyping, 3000)
+}
+
+const handleFinishedTyping = () => {
+    clearTimeout(typingTimeout)
+
+    emit('typing', false)
+}
 </script>
 
 <template>
@@ -28,5 +44,6 @@ const handleEnter = () => {
         v-on:keydown.enter.prevent="handleEnter"
         v-on:keydown.shift="shift = true"
         v-on:keyup="shift = false"
+        v-on:keydown="handleTyping"
     />
 </template>
