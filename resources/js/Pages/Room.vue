@@ -5,12 +5,15 @@ import ChatTextarea from "@/Components/Chat/ChatTextarea.vue";
 import {useMessagesStore} from "@/Store/useMessagesStore.js";
 import ChatMessages from "@/Components/Chat/ChatMessages.vue";
 import axios from "axios";
+import {useUsersStore} from "@/Store/useUsersStore.js";
+import ChatUsers from "@/Components/Chat/ChatUsers.vue";
 
 const props = defineProps({
     room: Object
 })
 
 const messagesStore = useMessagesStore()
+const usersStore = useUsersStore()
 
 messagesStore.fetchState(props.room.slug)
 
@@ -25,7 +28,7 @@ channel
         messagesStore.pushMessage(e)
     })
     .here(users => {
-        console.log(users)
+        usersStore.setUsers(users)
     })
 </script>
 
@@ -43,7 +46,7 @@ channel
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-12 gap-6">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-3">
                     <div class="p-6 text-gray-900">
-                        Users online
+                        <ChatUsers />
                     </div>
                 </div>
 
