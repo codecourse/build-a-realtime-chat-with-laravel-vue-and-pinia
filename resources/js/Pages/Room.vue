@@ -22,7 +22,7 @@ const channel = Echo.join(`room.${props.room.id}`)
 
 channel
     .listen('MessageCreated', (e) => {
-        console.log(e)
+        messagesStore.pushMessage(e)
     })
 </script>
 
